@@ -1,0 +1,6 @@
+framework module Pods_Rutin {
+  umbrella header "Pods-Rutin-umbrella.h"
+
+  export *
+  module * { export * }
+}
