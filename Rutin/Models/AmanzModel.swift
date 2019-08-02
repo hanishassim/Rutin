@@ -10,9 +10,9 @@ import Foundation
 
 struct AmanzModel {
     var title: String
-    var publishedTime: String
+    var publishedTime: Date
     var author: String
     var content: String?
-    var imageUrl: URL?
-    var videoUrl: URL?
+//    var imageUrl: URL?
+//    var videoUrl: URL?
 }

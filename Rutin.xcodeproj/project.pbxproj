@@ -15,6 +15,11 @@
 		072DBBA822D3563E0062147F /* RTDynamicValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBA722D3563E0062147F /* RTDynamicValue.swift */; };
 		072DBBAA22D35B740062147F /* RTGenericDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072DBBA922D35B740062147F /* RTGenericDataSource.swift */; };
 		0748E87D22D3871900FCAFE8 /* CSFeedKit in Resources */ = {isa = PBXBuildFile; fileRef = 0748E87C22D3871900FCAFE8 /* CSFeedKit */; };
+		0748E88022D3B23800FCAFE8 /* RTFeedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748E87F22D3B23800FCAFE8 /* RTFeedListVC.swift */; };
+		0748E88222D3B58D00FCAFE8 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748E88122D3B58D00FCAFE8 /* Feed.swift */; };
+		0748E88422D3C11F00FCAFE8 /* RTExpandableCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748E88322D3C11F00FCAFE8 /* RTExpandableCollectionCell.swift */; };
+		0748E88622D3C1C400FCAFE8 /* Expandable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748E88522D3C1C400FCAFE8 /* Expandable.swift */; };
+		0748E88822D3C6F000FCAFE8 /* RTBaseRoundedCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748E88722D3C6F000FCAFE8 /* RTBaseRoundedCardCell.swift */; };
 		0762597E226D673E000DFEB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0762597D226D673E000DFEB7 /* AppDelegate.swift */; };
 		07625980226D673E000DFEB7 /* RTMainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0762597F226D673E000DFEB7 /* RTMainMenuVC.swift */; };
 		07625983226D673E000DFEB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07625981226D673E000DFEB7 /* Main.storyboard */; };
@@ -43,6 +48,11 @@
 		072DBBA922D35B740062147F /* RTGenericDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTGenericDataSource.swift; sourceTree = "<group>"; };
 		0748E87C22D3871900FCAFE8 /* CSFeedKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CSFeedKit; sourceTree = "<group>"; };
 		0748E87E22D3875300FCAFE8 /* Rutin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rutin-Bridging-Header.h"; sourceTree = "<group>"; };
+		0748E87F22D3B23800FCAFE8 /* RTFeedListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTFeedListVC.swift; sourceTree = "<group>"; };
+		0748E88122D3B58D00FCAFE8 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		0748E88322D3C11F00FCAFE8 /* RTExpandableCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTExpandableCollectionCell.swift; sourceTree = "<group>"; };
+		0748E88522D3C1C400FCAFE8 /* Expandable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expandable.swift; sourceTree = "<group>"; };
+		0748E88722D3C6F000FCAFE8 /* RTBaseRoundedCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTBaseRoundedCardCell.swift; sourceTree = "<group>"; };
 		0762597A226D673E000DFEB7 /* Rutin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rutin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0762597D226D673E000DFEB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0762597F226D673E000DFEB7 /* RTMainMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTMainMenuVC.swift; sourceTree = "<group>"; };
@@ -116,12 +126,15 @@
 		07C9252522CE0F560031DA05 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				072DBBA322D328E40062147F /* RTCollectionViewFlowLayout.swift */,
 				0748E87C22D3871900FCAFE8 /* CSFeedKit */,
 				072DBBA722D3563E0062147F /* RTDynamicValue.swift */,
 				07C9252622CE0F670031DA05 /* Constants.swift */,
 				07C9252822CE0FBE0031DA05 /* String Extensions.swift */,
 				072DBBA922D35B740062147F /* RTGenericDataSource.swift */,
 				0748E87E22D3875300FCAFE8 /* Rutin-Bridging-Header.h */,
+				0748E88122D3B58D00FCAFE8 /* Feed.swift */,
+				0748E88522D3C1C400FCAFE8 /* Expandable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -143,8 +156,8 @@
 			children = (
 				07C9253922CE5DB10031DA05 /* Cells */,
 				0762597F226D673E000DFEB7 /* RTMainMenuVC.swift */,
-				072DBBA322D328E40062147F /* RTCollectionViewFlowLayout.swift */,
 				072DBBA522D3349C0062147F /* RTDynamicCollectionView.swift */,
+				0748E87F22D3B23800FCAFE8 /* RTFeedListVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -179,6 +192,8 @@
 				072DBB9D22D318FE0062147F /* RTMenuCollectionCell.swift */,
 				072DBB9F22D31A2D0062147F /* RTMenuCell.swift */,
 				072DBBA122D31CCF0062147F /* RTCollectionBaseCell.swift */,
+				0748E88322D3C11F00FCAFE8 /* RTExpandableCollectionCell.swift */,
+				0748E88722D3C6F000FCAFE8 /* RTBaseRoundedCardCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -339,11 +354,16 @@
 				07625980226D673E000DFEB7 /* RTMainMenuVC.swift in Sources */,
 				07C9252922CE0FBE0031DA05 /* String Extensions.swift in Sources */,
 				07C9253B22CE5DCE0031DA05 /* RTTableBaseCell.swift in Sources */,
+				0748E88422D3C11F00FCAFE8 /* RTExpandableCollectionCell.swift in Sources */,
 				072DBBAA22D35B740062147F /* RTGenericDataSource.swift in Sources */,
 				077EB61A22D36FF3002F2E95 /* AmanzModel.swift in Sources */,
 				0762597E226D673E000DFEB7 /* AppDelegate.swift in Sources */,
+				0748E88822D3C6F000FCAFE8 /* RTBaseRoundedCardCell.swift in Sources */,
 				072DBBA422D328E40062147F /* RTCollectionViewFlowLayout.swift in Sources */,
 				07C9252722CE0F670031DA05 /* Constants.swift in Sources */,
+				0748E88222D3B58D00FCAFE8 /* Feed.swift in Sources */,
+				0748E88622D3C1C400FCAFE8 /* Expandable.swift in Sources */,
+				0748E88022D3B23800FCAFE8 /* RTFeedListVC.swift in Sources */,
 				07C9253D22CE5DF70031DA05 /* RTHeaderLabelCell.swift in Sources */,
 				072DBBA022D31A2D0062147F /* RTMenuCell.swift in Sources */,
 				072DBB9E22D318FE0062147F /* RTMenuCollectionCell.swift in Sources */,

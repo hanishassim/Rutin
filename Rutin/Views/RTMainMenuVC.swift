@@ -53,6 +53,7 @@ class RTMainMenuVC: UIViewController {
     fileprivate func initTableView() {
         tableView.register(RTHeaderLabelCell.self, forCellReuseIdentifier: headerLabelCellId)
         tableView.register(RTMenuCell.self, forCellReuseIdentifier: menuCellId)
+        
         makeViewConstraints()
     }
     
@@ -61,10 +62,10 @@ class RTMainMenuVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for family in UIFont.familyNames.sorted() {
-            let names = UIFont.fontNames(forFamilyName: family)
-            print("Family: \(family) Font names: \(names)")
-        }
+//        for family in UIFont.familyNames.sorted() {
+//            let names = UIFont.fontNames(forFamilyName: family)
+//            print("Family: \(family) Font names: \(names)")
+//        }
         
         pastelView.startAnimation()
         view.insertSubview(pastelView, at: 0)
@@ -118,7 +119,6 @@ extension RTMainMenuVC: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.headerLabel.textColor = Color.white
-            cell.headerLabel.adjustsFontForContentSizeCategory = true
             cell.backgroundColor = .clear
             
             switch row {
@@ -178,23 +178,23 @@ extension RTMainMenuVC: UITableViewDelegate {
 }
 
 extension RTMainMenuVC: RTMenuCellDelegate {
-    func navigate(appData: [String: String]) {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .white
-        vc.title = appData["App"]
-        
-        let dismissButton = UIBarButtonItem(image: UIImage(named: "close__button_icon"), style: .plain, target: self, action: #selector(dismissButtonTapped))
-        vc.navigationItem.leftBarButtonItem  = dismissButton
-        vc.navigationItem.leftBarButtonItem?.tintColor = Color.primary
-        
-        guard let urlString = appData["feed_url"], let feedURL = URL(string: urlString) else {
-            return
-        }
-        
-        print(feedURL)
+    fileprivate func parepareDataForFeed(feedURL: URL, completion: BlockCompletionWithData?) {
+//        do {
+//            let feed = try Feed(contentsOf: feedURL)
+//
+////            feed.author?.name
+////            feed.items.count
+////            feed.nextURL
+//
+//            dump(feed)
+//            dump(try Data(feed))
+//        }
+//        catch {
+//            print("Hm, something is wrong here. Try connecting to the wifi.")
+//        }
         
         let parser = FeedParser(URL: feedURL)
-        
+
         // Parse asynchronously, not to block the UI.
         parser.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
             // Do your thing, then back to the Main thread
@@ -202,23 +202,64 @@ extension RTMainMenuVC: RTMenuCellDelegate {
                 // ..and update the UI
                 guard let feed = result.rssFeed, result.isSuccess, let title = feed.title, let description = feed.description else {
                     print(result.error)
+                    completion?(false, nil)
                     return
                 }
                 print(feed)
                 print(title)
                 print(description)
+
+                guard let articles = feed.items else {
+                    completion?(false, nil)
+                    return
+                }
                 
-                let item = feed.items?.first
+                var feedArticles = [AmanzModel]()
+
+                for article in articles {
+//                    let dateFormatter = DateFormatter()
+//                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+//                    dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+//                    let publishedDate = dateFormatter.date(from: )!
+//
+//                    let calendar = Calendar.current
+//                    let components = calendar.dateComponents([.year, .month, .day, .hour], from: date)
+//
+//                    let finalDate = calendar.date(from:components)
+
+                    let azModel = AmanzModel.init(title: article.title!, publishedTime: article.pubDate!, author: "", content: article.content?.contentEncoded!)
+                    
+                    feedArticles.append(azModel)
+                }
                 
-                print(item?.title)
-                print(item?.link)
-                print(item?.description)
-                print(item?.guid?.value)
-                print(item?.pubDate)
+                completion?(true, feedArticles)
             }
         }
+    }
+    
+    func navigate(appData: [String: String]) {
+        if let urlString = appData["feed_url"], let feedURL = URL(string: urlString), let app = appData["App"] {
+            let vc = RTFeedListVC(feedStyle: app.contains( "Amanz") ? .appStore : .regularList)
+            vc.view.backgroundColor = .white
+            vc.title = app
+
+            let dismissButton = UIBarButtonItem(image: UIImage(named: "close__button_icon"), style: .plain, target: self, action: #selector(dismissButtonTapped))
+            vc.navigationItem.leftBarButtonItem  = dismissButton
+            vc.navigationItem.leftBarButtonItem?.tintColor = Color.primary
+            
+            parepareDataForFeed(feedURL: feedURL) { (done, data) in
+                // print(done)
+                guard let articles = data as? [AmanzModel], done else {
+                    return
+                }
+                // print(articles)
+                
+                vc.dataSource.data.value = articles
+            }
+    
+            let navController = UINavigationController(rootViewController: vc)
+            present(navController, animated: true, completion: nil)
+        }
         
-        let navController = UINavigationController(rootViewController: vc)
-        present(navController, animated: true, completion: nil)
     }
 }

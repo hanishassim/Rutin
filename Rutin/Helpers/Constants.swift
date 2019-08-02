@@ -8,6 +8,9 @@
 
 import Foundation
 
+typealias BlockCompletion = (_ finished: Bool) -> Void
+typealias BlockCompletionWithData = (_ finished: Bool, _ data: Any?) -> Void
+
 enum Config {
     static let baseURL = NSURL(string: "http://www.example.org/")!
     static let splineReticulatorName = "foobar"

@@ -19,12 +19,6 @@ class RTMenuCollectionCell: RTCollectionBaseCell {
         return imageView
     }()
     
-    var dataSource = [String]() {
-        didSet {
-           
-        }
-    }
-    
     fileprivate func makeViewConstraints() {
         contentView.addSubview(iconImageView)
         

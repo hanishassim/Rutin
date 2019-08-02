@@ -9,7 +9,6 @@
 import UIKit
 
 class RTHeaderLabelCell: RTTableBaseCell {
-
     lazy var headerLabel: UILabel! = {
         let label = UILabel()
         label.font = UIFont.init(name: Font.bold, size: 38)
@@ -17,6 +16,7 @@ class RTHeaderLabelCell: RTTableBaseCell {
         label.textColor = Color.label.primary
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
+        label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
